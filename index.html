@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,37 +8,63 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0b0f19;
-      --card-bg: rgba(22, 30, 49, 0.75);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
+    /* Variables para Tema Negro (Dark) */
+    [data-theme="dark"] {
+      --bg: #000000;
+      --card-bg: #0c0c0e;
+      --card-border: #27272a;
+      --card-hover-border: #52525b;
+      --text-main: #ffffff;
+      --text-muted: #a1a1aa;
       --accent: #38bdf8;
-      --accent-purple: #a855f7;
-      --accent-green: #22c55e;
-      --glow: rgba(56, 189, 248, 0.15);
+      --accent-green: #4ade80;
+      --step-bg: #141418;
+      --badge-bg: rgba(74, 222, 128, 0.1);
+      --badge-border: rgba(74, 222, 128, 0.25);
+      --toggle-bg: #18181b;
+      --toggle-border: #3f3f46;
+      --toggle-text: #fafafa;
+      --shadow-color: rgba(0, 0, 0, 0.8);
+      --code-bg: #1e1e24;
+    }
+
+    /* Variables para Tema Blanco (Light) */
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --card-bg: #f8fafc;
+      --card-border: #e2e8f0;
+      --card-hover-border: #94a3b8;
+      --text-main: #09090b;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-green: #16a34a;
+      --step-bg: #f1f5f9;
+      --badge-bg: rgba(22, 163, 74, 0.08);
+      --badge-border: rgba(22, 163, 74, 0.25);
+      --toggle-bg: #f1f5f9;
+      --toggle-border: #cbd5e1;
+      --toggle-text: #0f172a;
+      --shadow-color: rgba(0, 0, 0, 0.05);
+      --code-bg: #e2e8f0;
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
     }
 
     body {
       font-family: 'Outfit', sans-serif;
       background-color: var(--bg);
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.12) 0px, transparent 50%);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
     }
 
     .container {
@@ -49,19 +75,45 @@
       gap: 1.75rem;
     }
 
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--toggle-bg);
+      border: 1px solid var(--toggle-border);
+      color: var(--toggle-text);
+      padding: 0.5rem 1.1rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .theme-toggle-btn:hover {
+      opacity: 0.85;
+      transform: scale(1.02);
+    }
+
     .badge-status {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(34, 197, 94, 0.12);
-      border: 1px solid rgba(34, 197, 94, 0.3);
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
       color: var(--accent-green);
-      padding: 0.4rem 1rem;
+      padding: 0.45rem 1.1rem;
       border-radius: 9999px;
       font-size: 0.85rem;
       font-weight: 600;
-      width: fit-content;
-      margin: 0 auto;
     }
 
     .badge-status .pulse {
@@ -69,7 +121,7 @@
       height: 8px;
       background-color: var(--accent-green);
       border-radius: 50%;
-      box-shadow: 0 0 12px var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-green);
       animation: pulseAnim 2s infinite;
     }
 
@@ -81,12 +133,11 @@
 
     .hero-card {
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      padding: 2.5rem 2rem;
+      padding: 3rem 2rem;
       text-align: center;
-      box-shadow: 0 20px 40px -15px var(--glow);
+      box-shadow: 0 15px 35px var(--shadow-color);
     }
 
     .hero-title {
@@ -95,16 +146,14 @@
       letter-spacing: -0.03em;
       line-height: 1.1;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #ffffff 30%, var(--accent) 70%, var(--accent-purple) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--text-main);
     }
 
     .hero-subtitle {
       color: var(--text-muted);
       font-size: 1.15rem;
       max-width: 600px;
-      margin: 0 auto 1.5rem auto;
+      margin: 0 auto 1.75rem auto;
       line-height: 1.6;
     }
 
@@ -116,38 +165,37 @@
 
     .info-card {
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 1.5rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
     .info-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(56, 189, 248, 0.3);
+      border-color: var(--card-hover-border);
+      transform: translateY(-2px);
     }
 
     .info-card h3 {
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--text-muted);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .info-card p {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 600;
-      color: #fff;
+      color: var(--text-main);
     }
 
     .pipeline-section {
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
       border-radius: 16px;
-      padding: 1.75rem;
+      padding: 2rem;
+      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
     .pipeline-section h2 {
@@ -156,6 +204,7 @@
       display: flex;
       align-items: center;
       gap: 0.6rem;
+      color: var(--text-main);
     }
 
     .pipeline-steps {
@@ -168,15 +217,15 @@
       display: flex;
       align-items: flex-start;
       gap: 1rem;
-      background: rgba(15, 23, 42, 0.6);
-      padding: 1rem;
+      background: var(--step-bg);
+      padding: 1.1rem;
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
     }
 
     .step-number {
-      background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-      color: #fff;
+      background: var(--text-main);
+      color: var(--bg);
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
       width: 28px;
@@ -191,24 +240,25 @@
 
     .step-content strong {
       display: block;
-      color: #fff;
-      margin-bottom: 0.2rem;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
       font-size: 0.95rem;
     }
 
     .step-content p {
       color: var(--text-muted);
-      font-size: 0.85rem;
-      line-height: 1.4;
+      font-size: 0.88rem;
+      line-height: 1.45;
     }
 
     .code-pill {
       font-family: 'JetBrains Mono', monospace;
-      background: rgba(56, 189, 248, 0.1);
+      background: var(--code-bg);
       color: var(--accent);
       padding: 0.15rem 0.45rem;
       border-radius: 6px;
       font-size: 0.8rem;
+      font-weight: 600;
     }
 
     .actions {
@@ -223,35 +273,35 @@
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      padding: 0.75rem 1.5rem;
+      padding: 0.8rem 1.6rem;
       border-radius: 12px;
       font-weight: 600;
       text-decoration: none;
       font-size: 0.95rem;
       cursor: pointer;
-      transition: all 0.2s ease;
       border: none;
+      font-family: inherit;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #0284c7);
-      color: #041226;
+      background: var(--text-main);
+      color: var(--bg);
       font-weight: 700;
     }
 
     .btn-primary:hover {
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+      opacity: 0.9;
       transform: translateY(-2px);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
+      background: var(--toggle-bg);
+      color: var(--text-main);
       border: 1px solid var(--card-border);
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--card-hover-border);
       transform: translateY(-2px);
     }
 
@@ -263,13 +313,16 @@
     }
 
     footer a {
-      color: var(--accent);
-      text-decoration: none;
+      color: var(--text-main);
+      text-decoration: underline;
     }
 
     @media (max-width: 600px) {
       .hero-title {
         font-size: 2.5rem;
+      }
+      .top-bar {
+        justify-content: center;
       }
     }
   </style>
@@ -277,15 +330,22 @@
 <body>
 
   <div class="container">
-    <div class="badge-status">
-      <span class="pulse"></span>
-      <span>Despliegue Continuo Activo • GitHub Pages</span>
+    <div class="top-bar">
+      <div class="badge-status">
+        <span class="pulse"></span>
+        <span>CI/CD Despliegue Automático • GitHub Pages</span>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle-btn" onclick="toggleTheme()">
+        <span id="themeIcon">☀️</span>
+        <span id="themeLabel">Cambiar a Blanco</span>
+      </button>
     </div>
 
     <div class="hero-card">
       <h1 class="hero-title">¡Hola Mundo! 👋</h1>
       <p class="hero-subtitle">
-        Página web estática desplegada automáticamente mediante <strong>CI/CD</strong> con <strong>GitHub Actions</strong> y <strong>GitHub Pages</strong>.
+        Página web estática con automatización <strong>CI/CD</strong> integrada desde GitHub hacia la nube en <strong>GitHub Pages</strong>.
       </p>
 
       <div class="actions">
@@ -312,44 +372,44 @@
       </div>
       <div class="info-card">
         <h3>Hosting en la Nube</h3>
-        <p style="color: var(--accent);">GitHub Pages (CDN)</p>
+        <p>GitHub Pages (CDN)</p>
       </div>
       <div class="info-card">
-        <h3>Integración</h3>
+        <h3>Automatización</h3>
         <p style="color: var(--accent-green);">GitHub Actions CI/CD</p>
       </div>
     </div>
 
     <div class="pipeline-section">
-      <h2>⚙️ Automatización del Flujo CI/CD</h2>
+      <h2>⚙️ Flujo Automatizado de Integración Continua</h2>
       <div class="pipeline-steps">
         <div class="step">
           <div class="step-number">1</div>
           <div class="step-content">
-            <strong>Push de Código al Repositorio</strong>
-            <p>Cada vez que se hace un <span class="code-pill">git push origin main</span>, GitHub detecta los cambios en el código de forma automática.</p>
+            <strong>Subida de Cambios (Push)</strong>
+            <p>Al hacer un <span class="code-pill">git push origin main</span>, el repositorio detecta la modificación al instante.</p>
           </div>
         </div>
         <div class="step">
           <div class="step-number">2</div>
           <div class="step-content">
-            <strong>Pipeline de GitHub Actions</strong>
-            <p>El flujo definido en <span class="code-pill">.github/workflows/deploy.yml</span> se activa, preparando el entorno y empaquetando los artefactos del sitio.</p>
+            <strong>Flujo de GitHub Actions</strong>
+            <p>Se activa el workflow en <span class="code-pill">.github/workflows/deploy.yml</span> que compila y empaqueta la página.</p>
           </div>
         </div>
         <div class="step">
           <div class="step-number">3</div>
           <div class="step-content">
-            <strong>Despliegue Global en la Nube</strong>
-            <p>GitHub Pages publica instantáneamente la nueva versión del sitio web con HTTPS asegurado y distribución en red de entrega de contenido (CDN).</p>
+            <strong>Despliegue Inmediato en la Nube</strong>
+            <p>Los cambios se sirven globalmente vía HTTPS a través del hosting de GitHub Pages sin tocar ningún servidor.</p>
           </div>
         </div>
       </div>
     </div>
 
     <footer>
-      <p>Práctica 3 • Automatización de Páginas Web • Desarrollado por <a href="https://github.com/Adrixn23" target="_blank">@Adrixn23</a></p>
-      <p style="margin-top: 0.35rem; font-size: 0.75rem; color: #64748b;" id="timestamp"></p>
+      <p>Práctica 3 • Automatización de Páginas Web • <a href="https://github.com/Adrixn23" target="_blank">@Adrixn23</a></p>
+      <p style="margin-top: 0.35rem; font-size: 0.75rem; color: var(--text-muted);" id="timestamp"></p>
     </footer>
   </div>
 
@@ -357,8 +417,33 @@
     document.getElementById("timestamp").textContent = "Última sincronización: " + new Date().toLocaleString();
 
     function saludar() {
-      alert("¡Hola Mundo! El despliegue automatizado está funcionando correctamente en GitHub Pages.");
+      alert("¡Hola Mundo! El despliegue automatizado está funcionando en la nube.");
     }
+
+    function updateThemeUI(theme) {
+      const icon = document.getElementById("themeIcon");
+      const label = document.getElementById("themeLabel");
+      if (theme === "light") {
+        icon.textContent = "🌙";
+        label.textContent = "Cambiar a Negro";
+      } else {
+        icon.textContent = "☀️";
+        label.textContent = "Cambiar a Blanco";
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme");
+      const next = current === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("theme_preference", next);
+      updateThemeUI(next);
+    }
+
+    // Cargar preferencia guardada o tema oscuro por defecto
+    const savedTheme = localStorage.getItem("theme_preference") || "dark";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    updateThemeUI(savedTheme);
   </script>
 </body>
 </html>
